@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.31.1",
+    "caniuse-lite": "^1.0.30001543",
     "eslint": "^8.0.0",
     "jest": "^29.5.0"
   }
