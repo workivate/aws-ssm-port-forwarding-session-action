@@ -58006,7 +58006,10 @@ const { SSMClient, StartSessionCommand } = __nccwpck_require__(20341);
 const run = async () => {
   try {
     console.log("Start SSM Port Forwarding Session");
-    const client = new SSMClient({region: process.env.AWS_DEFAULT_REGION, customUserAgent: "gha".concat("-",github.context.repo.repo)});
+    const client = new SSMClient({
+			region: process.env.AWS_DEFAULT_REGION,
+			customUserAgent: "gha".concat("-",github.context.repo.repo)
+	});
     
     const params = SanitizeInputs();
     const command = new StartSessionCommand(params);
@@ -58020,7 +58023,7 @@ const run = async () => {
 };
 
 function SanitizeInputs() {
-  // user input
+
   const _targetId = core.getInput('target-id', { required: true });
   const _portNumber = core.getInput('portNumber', { required: true });
   const _localPortNumber = core.getInput('localPortNumber', { required: true });
@@ -58038,11 +58041,12 @@ function SanitizeInputs() {
         _localPortNumber,
       ]
     },
-    Reason: github.context.runId
+    Reason: github.context.serverUrl + "/" + github.context.repo + "/actions/runs/" + github.context.runId.toString()
   };
 }
 
 run();
+
 })();
 
 module.exports = __webpack_exports__;
