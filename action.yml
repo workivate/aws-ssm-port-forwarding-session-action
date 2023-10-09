@@ -16,6 +16,6 @@ outputs:
   session-id:
     description: 'ssm session id'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
   post: 'cleanup.js'
