@@ -21,5 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: ./
+      env:
+        AWS_REGION: "eu-west-1"
       with:
         target-id: 'i-1234'
