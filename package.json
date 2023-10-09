@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "bundle": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "all": "npm run lint && npm run bundle && npm run test"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "@aws-sdk/client-ssm": "^3.271.0"
+    "@aws-sdk/client-ssm": "^3.427.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.38.0",
