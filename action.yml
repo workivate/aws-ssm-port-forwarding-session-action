@@ -1,20 +1,23 @@
 name: 'AWS SSM Port Forwarding Session'
-description: 'Start an SSM Port Forwarding Session in a github workflow'
+description: 'Start an SSM Port Forwarding Session in a GitHub workflow'
 inputs:
   target-id:
     description: 'Start session on instance'
     required: true
   portNumber:
-    description: 'port number to forward to'
+    description: 'Port number to forward to'
     required: true
     default: '8888'
   localPortNumber:
-    description: 'local port number'
+    description: 'Local port number'
     required: true
     default: '8888'
+  host:
+    description: 'Hostname or IP address of the remote host to connect to'
+    required: false
 outputs:
   session-id:
-    description: 'ssm session id'
+    description: 'SSM session ID'
 runs:
   using: 'node20'
   main: 'index.js'

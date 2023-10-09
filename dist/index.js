@@ -48609,10 +48609,10 @@ const run = async () => {
 			region: process.env.AWS_DEFAULT_REGION,
 			customUserAgent: "gha".concat("-",github.context.repo.repo)
 	});
-    
+
     const params = SanitizeInputs();
     const command = new StartSessionCommand(params);
- 
+
     const data = await client.send(command);
     core.saveState("session-id", data.SessionId);
   } catch (err) {
@@ -48626,20 +48626,21 @@ function SanitizeInputs() {
   const _targetId = core.getInput('target-id', { required: true });
   const _portNumber = core.getInput('portNumber', { required: true });
   const _localPortNumber = core.getInput('localPortNumber', { required: true });
-  
-  const _documentName = 'AWS-StartPortForwardingSession';
+  const _host = core.getInput('host');
+
+  const _documentName = (_host.length === 0) ? 'AWS-StartPortForwardingSession' : 'AWS-StartPortForwardingSessionToRemoteHost';
+
+  const _parameters = new Map();
+  _parameters.set('portNumber', [ _portNumber ]);
+  _parameters.set('localPortNumber', [ _localPortNumber ]);
+  if (_host.length > 0) {
+    _parameters.set('host', [ _host ]);
+  }
 
   return {
     Target: _targetId,
     DocumentName: _documentName,
-    Parameters: {
-      'portNumber': [
-        _portNumber,
-      ],
-      'localPortNumber': [
-        _localPortNumber,
-      ]
-    },
+    Parameters: _parameters,
     Reason: github.context.serverUrl + "/" + github.context.repo + "/actions/runs/" + github.context.runId.toString()
   };
 }
