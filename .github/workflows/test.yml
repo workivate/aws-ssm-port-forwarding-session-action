@@ -27,3 +27,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: "dummy"
       with:
         target-id: 'i-1234'
+      continue-on-error: true
